@@ -3,41 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0c0e">
-<meta name="description" content="Kairo Hub - Games, Apps and AI">
 <title>Kairo Hub</title>
 
 <style>
-:root {
-    --bg: #090a0c;
-    --bg2: #0d0f12;
-    --panel: #111317;
-    --panel2: #15181d;
-    --panel3: #191c22;
-    --border: #242830;
-    --border2: #30353e;
-    --text: #f1f3f5;
-    --muted: #8b929d;
-    --muted2: #636a75;
-    --orange: #ff6a00;
-    --orange2: #ff7d26;
-    --danger: #ff4d4d;
-    --green: #52d273;
-    --shadow: 0 18px 60px rgba(0,0,0,.35);
-}
-
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+:root {
+    --bg: #090a0c;
+    --panel: #101216;
+    --panel2: #14171b;
+    --panel3: #191c21;
+    --border: #272b31;
+    --text: #f2f3f5;
+    --muted: #858b94;
+    --orange: #ff7417;
+    --orange2: #ff8b3d;
+    --danger: #e05252;
 }
 
+html,
 body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
     background: var(--bg);
     color: var(--text);
     font-family:
@@ -48,6 +38,9 @@ body {
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+}
+
+body {
     overflow: hidden;
 }
 
@@ -57,74 +50,69 @@ input {
 }
 
 button {
-    border: 0;
+    cursor: pointer;
 }
 
-.app {
+#app {
     width: 100%;
     height: 100%;
     display: flex;
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar {
-    width: 240px;
-    min-width: 240px;
+    width: 230px;
+    min-width: 230px;
     height: 100%;
-    background: #0b0d10;
+    background: #0d0f12;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    padding: 18px 12px;
-    z-index: 20;
+    padding: 16px 12px;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 11px;
-    padding: 7px 10px 22px;
+    padding: 7px 9px 20px;
 }
 
-.brand-mark {
-    width: 31px;
-    height: 31px;
-    border: 2px solid var(--orange);
+.brand-logo {
+    width: 35px;
+    height: 35px;
     border-radius: 9px;
-    position: relative;
+    background: var(--orange);
+    color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.brand-mark::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    background: var(--orange);
-    border-radius: 3px;
+    font-size: 19px;
+    font-weight: 900;
 }
 
 .brand-name {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 750;
-    letter-spacing: -.4px;
+    letter-spacing: .2px;
 }
 
 .brand-sub {
+    color: var(--muted);
     font-size: 10px;
-    color: var(--muted2);
-    margin-top: 1px;
+    margin-top: 2px;
 }
 
 .nav-label {
-    color: #555c66;
+    color: #656b74;
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .12em;
     text-transform: uppercase;
-    padding: 13px 12px 7px;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    padding: 12px 10px 7px;
 }
 
 .nav {
@@ -135,77 +123,70 @@ button {
 
 .nav-button {
     width: 100%;
-    height: 40px;
-    border-radius: 8px;
+    border: 0;
     background: transparent;
-    color: #8f96a1;
+    color: #aeb3bb;
+    padding: 10px 11px;
+    border-radius: 7px;
     display: flex;
     align-items: center;
     gap: 11px;
-    padding: 0 12px;
-    cursor: pointer;
     text-align: left;
     transition: .15s ease;
 }
 
 .nav-button:hover {
-    background: #15181d;
-    color: #e8eaed;
+    background: #171a1e;
+    color: white;
 }
 
 .nav-button.active {
-    background: #1a1c20;
-    color: #fff;
-    box-shadow: inset 2px 0 0 var(--orange);
+    background: #1b1e23;
+    color: white;
 }
 
 .nav-icon {
-    width: 20px;
+    width: 19px;
     text-align: center;
+    color: #8b9199;
     font-size: 15px;
 }
 
-.nav-text {
-    font-size: 13px;
-    font-weight: 600;
+.nav-button.active .nav-icon {
+    color: var(--orange);
 }
 
-.sidebar-spacer {
-    flex: 1;
-}
-
-.status-card {
-    border: 1px solid var(--border);
-    background: #0f1115;
-    border-radius: 9px;
-    padding: 12px;
-    margin: 5px;
-}
-
-.status-title {
+.nav-count {
+    margin-left: auto;
+    color: #656b74;
     font-size: 11px;
-    font-weight: 700;
-    color: #d9dde2;
-    margin-bottom: 8px;
 }
 
-.status-row {
+.sidebar-bottom {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+}
+
+.status-small {
     display: flex;
     align-items: center;
     gap: 7px;
+    padding: 8px 10px;
     color: var(--muted);
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .status-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px rgba(82,210,115,.4);
+    background: #54b878;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .main {
     flex: 1;
@@ -216,195 +197,217 @@ button {
 }
 
 .topbar {
-    height: 65px;
-    min-height: 65px;
+    height: 62px;
+    min-height: 62px;
     border-bottom: 1px solid var(--border);
+    background: #0c0e11;
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 0 22px;
-    background: rgba(10,11,14,.92);
+    gap: 12px;
+    padding: 0 18px;
 }
 
 .page-title {
-    font-size: 18px;
-    font-weight: 750;
+    font-size: 15px;
+    font-weight: 700;
     white-space: nowrap;
 }
 
-.search {
+.search-wrap {
     flex: 1;
-    max-width: 530px;
-    margin-left: auto;
+    max-width: 620px;
+    margin: 0 auto;
     position: relative;
-}
-
-.search input {
-    width: 100%;
-    height: 38px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    outline: none;
-    background: #101216;
-    color: var(--text);
-    padding: 0 13px 0 38px;
-    font-size: 12px;
-    transition: .15s ease;
-}
-
-.search input:focus {
-    border-color: #3a404a;
-    background: #13161a;
 }
 
 .search-icon {
     position: absolute;
-    left: 13px;
-    top: 10px;
-    color: #666d78;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #646a73;
     font-size: 14px;
+    pointer-events: none;
 }
 
-.top-actions {
-    display: flex;
-    gap: 7px;
-}
-
-.icon-button {
-    width: 37px;
-    height: 37px;
-    border-radius: 8px;
+#search {
+    width: 100%;
+    height: 38px;
+    border-radius: 7px;
     border: 1px solid var(--border);
-    background: #101216;
-    color: #9aa1ab;
-    cursor: pointer;
-    transition: .15s ease;
+    background: #15181c;
+    color: white;
+    outline: none;
+    padding: 0 13px 0 35px;
 }
 
-.icon-button:hover {
+#search:focus {
+    border-color: #575d66;
+}
+
+#search::placeholder {
+    color: #666c75;
+}
+
+.top-button {
+    height: 36px;
+    min-width: 36px;
+    border: 1px solid var(--border);
+    background: #15181c;
+    color: #b7bcc4;
+    border-radius: 7px;
+}
+
+.top-button:hover {
+    background: #1b1e23;
     color: white;
-    border-color: var(--border2);
-    background: #171a1f;
 }
 
 .content {
     flex: 1;
-    overflow-y: auto;
+    overflow: auto;
     padding: 24px;
 }
 
-.content::-webkit-scrollbar {
-    width: 8px;
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    max-width: 1250px;
+    margin: 0 auto;
 }
 
-.content::-webkit-scrollbar-track {
-    background: transparent;
+.hidden {
+    display: none !important;
 }
 
-.content::-webkit-scrollbar-thumb {
-    background: #242830;
-    border-radius: 8px;
+.page-heading {
+    margin-bottom: 20px;
 }
 
-/* HOME */
+.page-heading h1 {
+    margin: 0 0 5px;
+    font-size: 26px;
+    letter-spacing: -.5px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* =========================
+   HOME HERO
+========================= */
 
 .hero {
-    min-height: 220px;
-    border: 1px solid var(--border);
     background:
-        radial-gradient(circle at 85% 40%, rgba(255,106,0,.12), transparent 35%),
-        linear-gradient(135deg, #111317, #0d0f12);
-    border-radius: 13px;
-    padding: 30px;
+        linear-gradient(
+            120deg,
+            #171a1f 0%,
+            #101216 55%,
+            #111317 100%
+        );
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 28px;
+    min-height: 190px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    overflow: hidden;
-    position: relative;
-    box-shadow: var(--shadow);
+    gap: 30px;
+    margin-bottom: 26px;
 }
 
-.hero::after {
-    content: "KAIRO";
-    position: absolute;
-    right: -15px;
-    bottom: -42px;
-    font-size: 170px;
-    font-weight: 900;
-    color: rgba(255,255,255,.018);
-    letter-spacing: -.08em;
-    pointer-events: none;
+.hero-text {
+    max-width: 650px;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.eyebrow {
+.hero-kicker {
     color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .hero h1 {
-    font-size: 32px;
     margin: 0 0 9px;
-    letter-spacing: -.8px;
+    font-size: 30px;
+    letter-spacing: -.7px;
 }
 
 .hero p {
     margin: 0;
-    color: var(--muted);
-    max-width: 530px;
-    line-height: 1.55;
+    color: #9298a1;
+    line-height: 1.6;
     font-size: 13px;
 }
 
-.hero-button {
-    margin-top: 19px;
+.hero-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.primary-button {
+    border: 0;
+    background: var(--orange);
+    color: #111;
     padding: 10px 15px;
     border-radius: 7px;
-    background: var(--orange);
-    color: #100b07;
-    font-weight: 800;
-    font-size: 12px;
-    cursor: pointer;
-    position: relative;
-    z-index: 3;
-}
-
-.hero-button:hover {
-    background: var(--orange2);
-}
-
-/* SECTIONS */
-
-.section {
-    margin-top: 28px;
-}
-
-.section-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-
-.section-title {
-    font-size: 15px;
     font-weight: 750;
 }
 
-.section-count {
-    color: var(--muted2);
-    font-size: 11px;
+.primary-button:hover {
+    background: var(--orange2);
 }
 
-/* CARDS */
+.secondary-button {
+    border: 1px solid var(--border);
+    background: #171a1e;
+    color: #d5d8dc;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+.secondary-button:hover {
+    background: #20242a;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    margin-bottom: 28px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 11px;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.section-link {
+    border: 0;
+    background: transparent;
+    color: var(--orange);
+    font-size: 12px;
+}
+
+/* =========================
+   CARDS
+========================= */
 
 .grid {
     display: grid;
@@ -413,327 +416,273 @@ button {
 }
 
 .card {
-    min-height: 142px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition:
-        transform .15s ease,
-        border-color .15s ease,
-        background .15s ease;
     position: relative;
+    min-height: 142px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 9px;
+    padding: 15px;
+    transition:
+        border-color .15s ease,
+        transform .15s ease,
+        background .15s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    border-color: #343a44;
-    background: var(--panel2);
+    border-color: #41464e;
+    background: #13161a;
+    transform: translateY(-1px);
 }
 
-.card-top {
-    height: 82px;
-    background:
-        radial-gradient(circle at 75% 35%, rgba(255,106,0,.14), transparent 35%),
-        linear-gradient(135deg, #171a1f, #101216);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.card-click {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: transparent;
+    z-index: 1;
 }
 
 .card-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 11px;
-    background: #0c0e11;
-    border: 1px solid #292e36;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #1d2025;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--orange);
-    font-size: 20px;
-    font-weight: 800;
+    font-weight: 850;
+    margin-bottom: 12px;
+}
+
+.card-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding-right: 30px;
+}
+
+.card-description {
+    color: #777e87;
+    font-size: 11px;
+    line-height: 1.45;
 }
 
 .favorite {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    background: rgba(0,0,0,.42);
-    color: #777e88;
-    cursor: pointer;
     z-index: 3;
+    right: 10px;
+    top: 10px;
+    width: 27px;
+    height: 27px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #626871;
 }
 
-.favorite:hover,
+.favorite:hover {
+    background: #20242a;
+    color: #ddd;
+}
+
 .favorite.active {
     color: var(--orange);
 }
 
-.card-info {
-    padding: 11px 12px;
-}
+/* =========================
+   EMPTY
+========================= */
 
-.card-title {
-    font-size: 12px;
-    font-weight: 750;
-    color: #e9ebee;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-description {
-    font-size: 10px;
-    color: var(--muted2);
-    margin-top: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-type {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    padding: 4px 6px;
-    border-radius: 5px;
-    background: rgba(0,0,0,.42);
-    color: #a8afb9;
-    font-size: 8px;
-    font-weight: 750;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-}
-
-/* EMPTY */
-
-.empty {
-    border: 1px dashed #292e36;
-    border-radius: 10px;
-    min-height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted2);
-    font-size: 12px;
+.empty-state {
+    border: 1px dashed #30343b;
+    border-radius: 9px;
+    padding: 35px 20px;
     text-align: center;
-    padding: 25px;
+    color: #6e747d;
 }
 
-/* PLAYER */
+.empty-state strong {
+    display: block;
+    color: #b8bdc4;
+    margin-bottom: 5px;
+}
 
-.player-overlay {
+/* =========================
+   PLAYER
+========================= */
+
+#playerOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.82);
-    backdrop-filter: blur(7px);
+    background: #050607;
     z-index: 100;
     display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-}
-
-.player-overlay.open {
-    display: flex;
-}
-
-.player-window {
-    width: min(1400px, 100%);
-    height: min(850px, 94vh);
-    background: #08090b;
-    border: 1px solid #292e36;
-    border-radius: 12px;
-    box-shadow: 0 30px 100px rgba(0,0,0,.7);
-    overflow: hidden;
-    display: flex;
     flex-direction: column;
 }
 
-.player-bar {
-    height: 48px;
-    min-height: 48px;
-    background: #101216;
+#playerOverlay.open {
+    display: flex;
+}
+
+.player-topbar {
+    height: 52px;
+    min-height: 52px;
+    background: #0d0f12;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    padding: 0 10px 0 15px;
     gap: 10px;
+    padding: 0 12px;
 }
 
 .player-title {
-    font-size: 12px;
-    font-weight: 700;
     flex: 1;
+    font-size: 13px;
+    font-weight: 700;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-
-.player-url {
-    color: var(--muted2);
-    font-size: 9px;
-    max-width: 35%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.player-buttons {
-    display: flex;
-    gap: 5px;
 }
 
 .player-button {
-    width: 32px;
-    height: 30px;
-    border-radius: 6px;
     border: 1px solid var(--border);
-    background: #15181d;
-    color: #9ba2ad;
-    cursor: pointer;
+    background: #16191d;
+    color: #b9bec6;
+    height: 32px;
+    padding: 0 11px;
+    border-radius: 6px;
 }
 
 .player-button:hover {
+    background: #20242a;
     color: white;
-    background: #1b1f25;
 }
 
-.player-button.close:hover {
-    color: #ff7777;
+.player-close:hover {
+    background: #321c1c;
+    color: #ff8a8a;
 }
 
-.player-frame-wrap {
+#gameFrame {
     flex: 1;
-    min-height: 0;
-    background: #000;
-}
-
-.player-frame {
     width: 100%;
-    height: 100%;
     border: 0;
-    display: block;
-    background: #000;
+    background: black;
 }
 
-/* APP PLACEHOLDER */
+/* =========================
+   SETTINGS
+========================= */
 
-.app-info {
-    max-width: 760px;
+.settings-panel {
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--panel);
+    overflow: hidden;
 }
 
-.app-info h2 {
-    margin: 0 0 8px;
-    font-size: 24px;
+.setting-row {
+    min-height: 68px;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.app-info p {
-    color: var(--muted);
-    line-height: 1.6;
+.setting-row:last-child {
+    border-bottom: 0;
+}
+
+.setting-name {
     font-size: 13px;
+    font-weight: 700;
 }
 
-.app-note {
-    margin-top: 16px;
-    padding: 12px 14px;
-    border: 1px solid #34271e;
-    background: rgba(255,106,0,.045);
-    border-radius: 8px;
-    color: #b6a99e;
+.setting-description {
+    color: var(--muted);
     font-size: 11px;
-    line-height: 1.55;
+    margin-top: 4px;
 }
 
-/* TOAST */
-
-.toast {
-    position: fixed;
-    left: 50%;
-    bottom: 22px;
-    transform: translate(-50%, 20px);
-    opacity: 0;
-    pointer-events: none;
-    background: #181b20;
-    border: 1px solid #30353e;
-    color: #e8eaed;
-    border-radius: 8px;
-    padding: 10px 14px;
+.setting-value {
+    color: #8d939b;
     font-size: 11px;
-    z-index: 300;
-    transition: .2s ease;
-    box-shadow: var(--shadow);
 }
 
-.toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-}
-
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 800px) {
     .sidebar {
-        width: 66px;
-        min-width: 66px;
-        padding: 12px 8px;
+        width: 65px;
+        min-width: 65px;
+        padding: 12px 7px;
     }
 
     .brand {
         justify-content: center;
-        padding: 6px 0 18px;
+        padding: 5px 0 18px;
     }
 
     .brand-text,
-    .nav-text,
     .nav-label,
-    .status-card {
+    .nav-button span:not(.nav-icon),
+    .nav-count,
+    .status-small span {
         display: none;
     }
 
     .nav-button {
         justify-content: center;
-        padding: 0;
+        padding: 11px;
     }
 
     .nav-icon {
-        font-size: 17px;
+        width: auto;
+    }
+
+    .sidebar-bottom {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topbar {
+        padding: 0 10px;
+    }
+
+    .page-title {
+        display: none;
     }
 
     .content {
         padding: 15px;
     }
+}
 
-    .topbar {
-        padding: 0 13px;
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: 1fr;
     }
 
     .hero {
-        padding: 22px;
+        padding: 20px;
     }
 
     .hero h1 {
-        font-size: 25px;
+        font-size: 24px;
     }
 
-    .player-overlay {
-        padding: 0;
-    }
-
-    .player-window {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-
-    .player-url {
-        display: none;
+    .search-wrap {
+        max-width: none;
     }
 }
 </style>
@@ -741,42 +690,44 @@ button {
 
 <body>
 
-<div class="app">
+<div id="app">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark"></div>
+            <div class="brand-logo">K</div>
 
             <div class="brand-text">
                 <div class="brand-name">Kairo</div>
-                <div class="brand-sub">HUB</div>
+                <div class="brand-sub">Games & Apps</div>
             </div>
         </div>
 
-        <div class="nav-label">Navigation</div>
+        <div class="nav-label">Library</div>
 
         <nav class="nav">
 
             <button class="nav-button active" data-page="home">
                 <span class="nav-icon">⌂</span>
-                <span class="nav-text">Home</span>
+                <span>Home</span>
             </button>
 
             <button class="nav-button" data-page="games">
                 <span class="nav-icon">▣</span>
-                <span class="nav-text">Games</span>
+                <span>Games</span>
+                <span class="nav-count" id="gameCount">0</span>
             </button>
 
             <button class="nav-button" data-page="apps">
                 <span class="nav-icon">▦</span>
-                <span class="nav-text">Apps</span>
+                <span>Apps</span>
+                <span class="nav-count" id="appCount">0</span>
             </button>
 
             <button class="nav-button" data-page="favorites">
                 <span class="nav-icon">★</span>
-                <span class="nav-text">Favorites</span>
+                <span>Favorites</span>
             </button>
 
         </nav>
@@ -785,35 +736,26 @@ button {
 
         <nav class="nav">
 
+            <button class="nav-button" data-page="settings">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </button>
+
             <button class="nav-button" data-page="about">
                 <span class="nav-icon">i</span>
-                <span class="nav-text">About</span>
+                <span>About</span>
             </button>
 
         </nav>
 
-        <div class="sidebar-spacer"></div>
-
-        <div class="status-card">
-
-            <div class="status-title">
-                Kairo Environment
-            </div>
-
-            <div class="status-row">
+        <div class="sidebar-bottom">
+            <div class="status-small">
                 <span class="status-dot"></span>
-                <span id="connectionText">Hub Online</span>
+                <span>GitHub connected</span>
             </div>
-
-            <div class="status-row" style="margin-top:6px;">
-                <span id="gamepadDot" class="status-dot" style="background:#555c66;box-shadow:none;"></span>
-                <span id="gamepadText">No Controller</span>
-            </div>
-
         </div>
 
     </aside>
-
 
     <!-- MAIN -->
     <main class="main">
@@ -824,39 +766,324 @@ button {
                 Home
             </div>
 
-            <div class="search">
-
+            <div class="search-wrap">
                 <span class="search-icon">⌕</span>
-
                 <input
-                    id="searchInput"
+                    id="search"
                     type="search"
                     placeholder="Search games and apps..."
                     autocomplete="off"
                 >
-
             </div>
 
-            <div class="top-actions">
-
-                <button
-                    class="icon-button"
-                    id="refreshButton"
-                    title="Refresh"
-                >
-                    ↻
-                </button>
-
-            </div>
+            <button
+                class="top-button"
+                id="refreshButton"
+                title="Refresh library"
+            >
+                ↻
+            </button>
 
         </header>
 
+        <section class="content">
 
-        <div class="content" id="content">
+            <!-- HOME -->
+            <div class="page" id="page-home">
 
-            <!-- CONTENT GENERATED HERE -->
+                <div class="hero">
 
-        </div>
+                    <div class="hero-text">
+                        <div class="hero-kicker">
+                            Kairo Software
+                        </div>
+
+                        <h1>
+                            Games & applications
+                        </h1>
+
+                        <p>
+                            One launcher for everything in your
+                            games-working- repository.
+                            Games and apps are automatically discovered
+                            from GitHub.
+                        </p>
+                    </div>
+
+                    <div class="hero-actions">
+                        <button
+                            class="primary-button"
+                            onclick="showPage('games')"
+                        >
+                            Browse Games
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            onclick="showPage('apps')"
+                        >
+                            Open Apps
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="section-header">
+                        <div class="section-title">
+                            Recent Games
+                        </div>
+
+                        <button
+                            class="section-link"
+                            onclick="showPage('games')"
+                        >
+                            View all
+                        </button>
+                    </div>
+
+                    <div
+                        class="grid"
+                        id="homeGames"
+                    ></div>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="section-header">
+                        <div class="section-title">
+                            Apps
+                        </div>
+
+                        <button
+                            class="section-link"
+                            onclick="showPage('apps')"
+                        >
+                            View all
+                        </button>
+                    </div>
+
+                    <div
+                        class="grid"
+                        id="homeApps"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            <!-- GAMES -->
+            <div class="page hidden" id="page-games">
+
+                <div class="page-heading">
+                    <h1>Games</h1>
+                    <p>
+                        Games discovered from your repository.
+                    </p>
+                </div>
+
+                <div
+                    class="grid"
+                    id="gamesGrid"
+                ></div>
+
+            </div>
+
+            <!-- APPS -->
+            <div class="page hidden" id="page-apps">
+
+                <div class="page-heading">
+                    <h1>Apps</h1>
+                    <p>
+                        Browser applications discovered from
+                        the <code>/apps/</code> directory.
+                    </p>
+                </div>
+
+                <div
+                    class="grid"
+                    id="appsGrid"
+                ></div>
+
+            </div>
+
+            <!-- FAVORITES -->
+            <div class="page hidden" id="page-favorites">
+
+                <div class="page-heading">
+                    <h1>Favorites</h1>
+                    <p>
+                        Your saved games and applications.
+                    </p>
+                </div>
+
+                <div
+                    class="grid"
+                    id="favoritesGrid"
+                ></div>
+
+            </div>
+
+            <!-- SETTINGS -->
+            <div class="page hidden" id="page-settings">
+
+                <div class="page-heading">
+                    <h1>Settings</h1>
+                    <p>
+                        Kairo Hub configuration.
+                    </p>
+                </div>
+
+                <div class="settings-panel">
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Repository
+                            </div>
+
+                            <div class="setting-description">
+                                GitHub repository used by Kairo Hub.
+                            </div>
+                        </div>
+
+                        <div class="setting-value">
+                            yourneighborhoodyapper5-hash/games-working-
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Branch
+                            </div>
+
+                            <div class="setting-description">
+                                Git branch used for discovery.
+                            </div>
+                        </div>
+
+                        <div class="setting-value">
+                            main
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Game discovery
+                            </div>
+
+                            <div class="setting-description">
+                                Root-level folders containing index.html
+                                are treated as games.
+                            </div>
+                        </div>
+
+                        <div class="setting-value">
+                            Automatic
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                App discovery
+                            </div>
+
+                            <div class="setting-description">
+                                Only folders inside /apps/ are treated
+                                as applications.
+                            </div>
+                        </div>
+
+                        <div class="setting-value">
+                            Automatic
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Favorites
+                            </div>
+
+                            <div class="setting-description">
+                                Stored locally in this browser.
+                            </div>
+                        </div>
+
+                        <button
+                            class="secondary-button"
+                            onclick="clearFavorites()"
+                        >
+                            Clear Favorites
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ABOUT -->
+            <div class="page hidden" id="page-about">
+
+                <div class="page-heading">
+                    <h1>About Kairo Hub</h1>
+                    <p>
+                        A lightweight launcher for the
+                        games-working- repository.
+                    </p>
+                </div>
+
+                <div class="settings-panel">
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Kairo Hub
+                            </div>
+
+                            <div class="setting-description">
+                                Browser-based game and application launcher.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Games
+                            </div>
+
+                            <div class="setting-description">
+                                Automatically discovered from existing
+                                root-level game folders.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-name">
+                                Apps
+                            </div>
+
+                            <div class="setting-description">
+                                Automatically discovered from /apps/.
+                                You can add YouTube, Android,
+                                Kairo and other browser applications here.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
     </main>
 
@@ -864,587 +1091,235 @@ button {
 
 
 <!-- PLAYER -->
+<div id="playerOverlay">
 
-<div class="player-overlay" id="playerOverlay">
+    <div class="player-topbar">
 
-    <div class="player-window">
-
-        <div class="player-bar">
-
-            <div class="player-title" id="playerTitle">
-                Loading...
-            </div>
-
-            <div class="player-url" id="playerUrl"></div>
-
-            <div class="player-buttons">
-
-                <button
-                    class="player-button"
-                    id="playerReload"
-                    title="Reload"
-                >
-                    ↻
-                </button>
-
-                <button
-                    class="player-button"
-                    id="playerFullscreen"
-                    title="Fullscreen"
-                >
-                    ⛶
-                </button>
-
-                <button
-                    class="player-button close"
-                    id="playerClose"
-                    title="Close"
-                >
-                    ×
-                </button>
-
-            </div>
-
+        <div
+            class="player-title"
+            id="playerTitle"
+        >
+            Loading...
         </div>
 
-        <div class="player-frame-wrap">
+        <button
+            class="player-button"
+            onclick="reloadPlayer()"
+        >
+            Reload
+        </button>
 
-            <iframe
-                id="playerFrame"
-                class="player-frame"
-                allow="
-                    fullscreen;
-                    autoplay;
-                    gamepad;
-                    clipboard-read;
-                    clipboard-write;
-                    accelerometer;
-                    gyroscope
-                "
-                allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
+        <button
+            class="player-button"
+            onclick="fullscreenPlayer()"
+        >
+            Fullscreen
+        </button>
 
-        </div>
+        <button
+            class="player-button player-close"
+            onclick="closePlayer()"
+        >
+            Close
+        </button>
 
     </div>
+
+    <iframe
+        id="gameFrame"
+        allow="fullscreen; gamepad; autoplay"
+        allowfullscreen
+        referrerpolicy="no-referrer"
+    ></iframe>
 
 </div>
 
 
-<div class="toast" id="toast"></div>
-
-
 <script>
+
 /* =========================================================
-   KAIRO HUB
-   ========================================================= */
+   CONFIGURATION
+========================================================= */
 
 const CONFIG = {
     owner: "yourneighborhoodyapper5-hash",
     repo: "games-working-",
-    branch: "main",
-
-    apiBase:
-        "https://api.github.com/repos/yourneighborhoodyapper5-hash/games-working-",
-
-    pagesBase:
-        "https://yourneighborhoodyapper5-hash.github.io/games-working-/"
+    branch: "main"
 };
+
+const API_URL =
+    `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/git/trees/${CONFIG.branch}?recursive=1`;
+
+const PAGES_BASE =
+    `https://${CONFIG.owner}.github.io/${CONFIG.repo}/`;
 
 
 /* =========================================================
    STATE
-   ========================================================= */
+========================================================= */
 
 let games = [];
 let apps = [];
 let currentPage = "home";
-let currentItem = null;
-let favorites = JSON.parse(
-    localStorage.getItem("kairo-games-favorites") || "[]"
-);
-
-let searchQuery = "";
+let currentPlayerURL = "";
 
 
 /* =========================================================
-   BUILT-IN APPS
-   ========================================================= */
+   ELEMENTS
+========================================================= */
 
-const builtInApps = [
+const searchInput =
+    document.getElementById("search");
 
-    {
-        id: "youtube",
-        name: "YouTube",
-        description: "Video platform",
-        icon: "▶",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const gameCount =
+    document.getElementById("gameCount");
 
-    {
-        id: "android",
-        name: "Android",
-        description: "Android emulator",
-        icon: "A",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const appCount =
+    document.getElementById("appCount");
 
-    {
-        id: "ai",
-        name: "AI",
-        description: "Kairo AI",
-        icon: "K",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const pageTitle =
+    document.getElementById("pageTitle");
 
-    {
-        id: "files",
-        name: "Files",
-        description: "File manager",
-        icon: "▤",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const playerOverlay =
+    document.getElementById("playerOverlay");
 
-    {
-        id: "notes",
-        name: "Notes",
-        description: "Local notes",
-        icon: "N",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const gameFrame =
+    document.getElementById("gameFrame");
 
-    {
-        id: "calculator",
-        name: "Calculator",
-        description: "Calculator",
-        icon: "+",
-        type: "app",
-        configured: false,
-        url: null
-    },
+const playerTitle =
+    document.getElementById("playerTitle");
 
-    {
-        id: "settings",
-        name: "Settings",
-        description: "Kairo settings",
-        icon: "⚙",
-        type: "app",
-        configured: false,
-        url: null
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+function getFavorites() {
+    try {
+        return JSON.parse(
+            localStorage.getItem("kairoFavorites") || "[]"
+        );
+    } catch {
+        return [];
     }
-
-];
-
-
-/* =========================================================
-   DOM
-   ========================================================= */
-
-const content = document.getElementById("content");
-const pageTitle = document.getElementById("pageTitle");
-const searchInput = document.getElementById("searchInput");
-
-const playerOverlay = document.getElementById("playerOverlay");
-const playerFrame = document.getElementById("playerFrame");
-const playerTitle = document.getElementById("playerTitle");
-const playerUrl = document.getElementById("playerUrl");
-
-const toast = document.getElementById("toast");
-
-
-/* =========================================================
-   UTILITIES
-   ========================================================= */
-
-function showToast(message) {
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    clearTimeout(showToast.timer);
-
-    showToast.timer = setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    }, 2200);
 }
 
-
-function saveFavorites() {
-
+function saveFavorites(list) {
     localStorage.setItem(
-        "kairo-games-favorites",
-        JSON.stringify(favorites)
+        "kairoFavorites",
+        JSON.stringify(list)
     );
-
 }
 
-
-function isFavorite(id) {
-
-    return favorites.includes(id);
-
+function favoriteKey(item) {
+    return item.type + ":" + item.path;
 }
 
+function isFavorite(item) {
+    return getFavorites().includes(
+        favoriteKey(item)
+    );
+}
 
-function toggleFavorite(id, event) {
+function toggleFavorite(item) {
 
-    if (event) {
-        event.stopPropagation();
-    }
+    let favorites = getFavorites();
 
-    if (isFavorite(id)) {
+    const key = favoriteKey(item);
 
+    if (favorites.includes(key)) {
         favorites = favorites.filter(
-            item => item !== id
+            x => x !== key
         );
-
-        showToast("Removed from favorites");
-
     } else {
-
-        favorites.push(id);
-
-        showToast("Added to favorites");
-
+        favorites.push(key);
     }
 
-    saveFavorites();
+    saveFavorites(favorites);
 
-    render();
+    renderAll();
+}
 
+function clearFavorites() {
+    localStorage.removeItem("kairoFavorites");
+    renderAll();
 }
 
 
 /* =========================================================
-   GITHUB DISCOVERY
-   ========================================================= */
+   PAGE NAVIGATION
+========================================================= */
 
-async function getGitHubTree() {
+function showPage(page) {
 
-    const url =
-        `${CONFIG.apiBase}/git/trees/${CONFIG.branch}?recursive=1`;
+    currentPage = page;
 
-    const response = await fetch(url, {
-        headers: {
-            "Accept": "application/vnd.github+json"
-        }
-    });
-
-    if (!response.ok) {
-
-        throw new Error(
-            `GitHub API returned ${response.status}`
-        );
-
-    }
-
-    return response.json();
-
-}
-
-
-function cleanName(name) {
-
-    return name
-        .replace(/[-_]+/g, " ")
-        .replace(/\b\w/g, char => char.toUpperCase());
-
-}
-
-
-function ignoredDirectory(path) {
-
-    const ignored = [
-
-        ".git",
-        ".github",
-        "node_modules",
-        "dist",
-        "build",
-        "assets",
-        "docs",
-        "screenshots"
-
-    ];
-
-    return ignored.some(folder => {
-
-        return path
-            .split("/")
-            .includes(folder);
-
-    });
-
-}
-
-
-function discoverGames(tree) {
-
-    const discovered = new Map();
-
-    for (const item of tree) {
-
-        if (item.type !== "blob") {
-            continue;
-        }
-
-        if (!item.path.toLowerCase().endsWith("/index.html")) {
-            continue;
-        }
-
-        const parts = item.path.split("/");
-
-        if (parts.length < 2) {
-            continue;
-        }
-
-        parts.pop();
-
-        const directory = parts.join("/");
-
-        if (ignoredDirectory(directory)) {
-            continue;
-        }
-
-        const id = directory.toLowerCase();
-
-        if (discovered.has(id)) {
-            continue;
-        }
-
-        const name = cleanName(
-            parts[parts.length - 1]
-        );
-
-        const url =
-            CONFIG.pagesBase +
-            directory
-                .split("/")
-                .map(encodeURIComponent)
-                .join("/") +
-            "/";
-
-        discovered.set(id, {
-
-            id: `game-${id}`,
-
-            name,
-
-            description:
-                "Browser game",
-
-            icon:
-                name
-                    .trim()
-                    .charAt(0)
-                    .toUpperCase() || "G",
-
-            type: "game",
-
-            path: directory,
-
-            url
-
+    document
+        .querySelectorAll(".page")
+        .forEach(el => {
+            el.classList.add("hidden");
         });
 
-    }
-
-    return Array.from(discovered.values())
-        .sort((a, b) =>
-            a.name.localeCompare(b.name)
+    const target =
+        document.getElementById(
+            "page-" + page
         );
 
+    if (target) {
+        target.classList.remove("hidden");
+    }
+
+    document
+        .querySelectorAll(".nav-button")
+        .forEach(button => {
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+        });
+
+    const names = {
+        home: "Home",
+        games: "Games",
+        apps: "Apps",
+        favorites: "Favorites",
+        settings: "Settings",
+        about: "About"
+    };
+
+    pageTitle.textContent =
+        names[page] || "Kairo";
+
+    searchInput.value = "";
+
+    renderCurrentPage();
 }
+
+document
+    .querySelectorAll(".nav-button")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => showPage(button.dataset.page)
+        );
+
+    });
 
 
 /* =========================================================
-   LOAD GAMES
-   ========================================================= */
+   SEARCH
+========================================================= */
 
-async function loadGames() {
-
-    try {
-
-        setConnection(
-            true,
-            "Loading library..."
-        );
-
-        const tree =
-            await getGitHubTree();
-
-        games =
-            discoverGames(tree.tree || []);
-
-        setConnection(
-            true,
-            `${games.length} Games`
-        );
-
-        render();
-
-    } catch (error) {
-
-        console.error(error);
-
-        games = [];
-
-        setConnection(
-            false,
-            "GitHub unavailable"
-        );
-
-        render();
-
-        showToast(
-            "Couldn't load GitHub library"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CONNECTION STATUS
-   ========================================================= */
-
-function setConnection(online, text) {
-
-    const dot =
-        document.querySelector(".status-dot");
-
-    const connectionText =
-        document.getElementById("connectionText");
-
-    if (online) {
-
-        dot.style.background =
-            "var(--green)";
-
-        dot.style.boxShadow =
-            "0 0 8px rgba(82,210,115,.4)";
-
-    } else {
-
-        dot.style.background =
-            "var(--danger)";
-
-        dot.style.boxShadow =
-            "0 0 8px rgba(255,77,77,.4)";
-
-    }
-
-    connectionText.textContent = text;
-
-}
-
-
-/* =========================================================
-   GAMEPAD
-   ========================================================= */
-
-function updateGamepadStatus() {
-
-    const pads =
-        navigator.getGamepads
-            ? navigator.getGamepads()
-            : [];
-
-    let connected = false;
-
-    for (const pad of pads) {
-
-        if (pad) {
-
-            connected = true;
-            break;
-
-        }
-
-    }
-
-    const dot =
-        document.getElementById("gamepadDot");
-
-    const text =
-        document.getElementById("gamepadText");
-
-    if (connected) {
-
-        dot.style.background =
-            "var(--green)";
-
-        dot.style.boxShadow =
-            "0 0 8px rgba(82,210,115,.4)";
-
-        text.textContent =
-            "Controller Connected";
-
-    } else {
-
-        dot.style.background =
-            "#555c66";
-
-        dot.style.boxShadow =
-            "none";
-
-        text.textContent =
-            "No Controller";
-
-    }
-
-}
-
-
-window.addEventListener(
-    "gamepadconnected",
-    updateGamepadStatus
+searchInput.addEventListener(
+    "input",
+    renderCurrentPage
 );
 
-window.addEventListener(
-    "gamepaddisconnected",
-    updateGamepadStatus
-);
-
-setInterval(
-    updateGamepadStatus,
-    2000
-);
-
-
-/* =========================================================
-   FILTERING
-   ========================================================= */
-
-function allItems() {
-
-    return [
-        ...games,
-        ...builtInApps
-    ];
-
-}
-
-
-function filteredItems(items) {
+function getSearchResults(items) {
 
     const query =
-        searchQuery
+        searchInput.value
             .trim()
             .toLowerCase();
 
@@ -1452,61 +1327,306 @@ function filteredItems(items) {
         return items;
     }
 
-    return items.filter(item => {
+    return items.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+    );
+}
 
-        return (
-            item.name
-                .toLowerCase()
-                .includes(query) ||
 
-            item.description
-                .toLowerCase()
-                .includes(query)
+/* =========================================================
+   GITHUB DISCOVERY
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    Games:
+      root-folder/index.html
+
+    Apps:
+      apps/app-name/index.html
+
+    Ignored:
+      .github/
+      .git/
+      node_modules/
+      dist/
+      build/
+      docs/
+      assets/
+      screenshots/
+      the root index.html itself
+*/
+
+function shouldIgnorePath(path) {
+
+    const parts =
+        path.split("/");
+
+    const ignoredFolders = new Set([
+        ".git",
+        ".github",
+        "node_modules",
+        "dist",
+        "build",
+        "assets",
+        "screenshots",
+        "docs",
+        ".vscode",
+        ".idea"
+    ]);
+
+    return parts.some(
+        part => ignoredFolders.has(part)
+    );
+}
+
+
+function pathToName(path) {
+
+    const parts =
+        path.split("/");
+
+    if (parts[0] === "apps") {
+
+        return parts[1]
+            .replace(/[-_]/g, " ")
+            .replace(/\b\w/g, c => c.toUpperCase());
+
+    }
+
+    return parts[0]
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+
+function createGameFromPath(path) {
+
+    const folder =
+        path.substring(
+            0,
+            path.lastIndexOf("/")
         );
 
-    });
+    return {
+        type: "game",
+        name: pathToName(path),
+        path: folder,
+        file: path,
+        url: PAGES_BASE + folder + "/",
+        description: "Game"
+    };
+}
+
+
+function createAppFromPath(path) {
+
+    const folder =
+        path.substring(
+            0,
+            path.lastIndexOf("/")
+        );
+
+    return {
+        type: "app",
+        name: pathToName(path),
+        path: folder,
+        file: path,
+        url: PAGES_BASE + folder + "/",
+        description: "Browser application"
+    };
+}
+
+
+async function discover() {
+
+    try {
+
+        const response =
+            await fetch(API_URL, {
+                headers: {
+                    "Accept":
+                        "application/vnd.github+json"
+                }
+            });
+
+        if (!response.ok) {
+            throw new Error(
+                "GitHub API returned " +
+                response.status
+            );
+        }
+
+        const data =
+            await response.json();
+
+        games = [];
+        apps = [];
+
+        const tree =
+            Array.isArray(data.tree)
+                ? data.tree
+                : [];
+
+        for (const item of tree) {
+
+            if (
+                item.type !== "blob" ||
+                !item.path.endsWith("/index.html")
+            ) {
+                continue;
+            }
+
+            if (shouldIgnorePath(item.path)) {
+                continue;
+            }
+
+            /*
+             * NEVER treat the root index.html
+             * as a game.
+             */
+            if (item.path === "index.html") {
+                continue;
+            }
+
+            const parts =
+                item.path.split("/");
+
+            /*
+             * APP DISCOVERY
+             *
+             * Only:
+             *
+             * apps/foo/index.html
+             *
+             * is an app.
+             */
+            if (
+                parts[0] === "apps" &&
+                parts.length >= 3
+            ) {
+
+                apps.push(
+                    createAppFromPath(item.path)
+                );
+
+                continue;
+            }
+
+            /*
+             * GAME DISCOVERY
+             *
+             * Existing structure:
+             *
+             * nzp/index.html
+             * redline/index.html
+             *
+             * We only accept a root-level
+             * folder containing index.html.
+             *
+             * This prevents .github/foo,
+             * docs/foo, etc. from appearing.
+             */
+            if (parts.length === 2) {
+
+                games.push(
+                    createGameFromPath(item.path)
+                );
+
+            }
+
+        }
+
+        games.sort(
+            (a, b) =>
+                a.name.localeCompare(b.name)
+        );
+
+        apps.sort(
+            (a, b) =>
+                a.name.localeCompare(b.name)
+        );
+
+        updateCounts();
+        renderAll();
+
+    } catch (error) {
+
+        console.error(
+            "Kairo discovery failed:",
+            error
+        );
+
+        games = [];
+        apps = [];
+
+        updateCounts();
+
+        renderAll();
+
+    }
+
+}
+
+
+/* =========================================================
+   COUNTS
+========================================================= */
+
+function updateCounts() {
+
+    gameCount.textContent =
+        games.length;
+
+    appCount.textContent =
+        apps.length;
 
 }
 
 
 /* =========================================================
    CARD
-   ========================================================= */
+========================================================= */
 
-function createCard(item) {
+function iconFor(item) {
 
-    const card =
-        document.createElement("div");
+    if (item.type === "app") {
+        return "▦";
+    }
 
-    card.className = "card";
+    return "▶";
+}
+
+
+function cardHTML(item) {
 
     const favorite =
-        isFavorite(item.id);
+        isFavorite(item);
 
-    card.innerHTML = `
+    return `
+        <article class="card">
 
-        <div class="card-top">
-
-            <div class="card-type">
-                ${item.type}
-            </div>
-
-            <div class="card-icon">
-                ${escapeHTML(item.icon)}
-            </div>
+            <button
+                class="card-click"
+                onclick='launchItem(${JSON.stringify(item).replace(/'/g, "&#39;")})'
+                aria-label="Open ${escapeHTML(item.name)}"
+            ></button>
 
             <button
                 class="favorite ${favorite ? "active" : ""}"
-                title="Favorite"
+                onclick='event.stopPropagation(); toggleFavorite(${JSON.stringify(item).replace(/'/g, "&#39;")})'
+                title="${favorite ? "Remove favorite" : "Add favorite"}"
             >
                 ${favorite ? "★" : "☆"}
             </button>
 
-        </div>
+            <div class="card-icon">
+                ${iconFor(item)}
+            </div>
 
-        <div class="card-info">
-
-            <div class="card-title">
+            <div class="card-name">
                 ${escapeHTML(item.name)}
             </div>
 
@@ -1514,26 +1634,8 @@ function createCard(item) {
                 ${escapeHTML(item.description)}
             </div>
 
-        </div>
-
+        </article>
     `;
-
-    card.addEventListener(
-        "click",
-        () => openItem(item)
-    );
-
-    card.querySelector(".favorite")
-        .addEventListener(
-            "click",
-            event => toggleFavorite(
-                item.id,
-                event
-            )
-        );
-
-    return card;
-
 }
 
 
@@ -1550,483 +1652,153 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   GRID
-   ========================================================= */
+   RENDER GRID
+========================================================= */
 
-function renderGrid(items, emptyMessage) {
+function renderGrid(element, items) {
+
+    if (!element) {
+        return;
+    }
 
     const filtered =
-        filteredItems(items);
+        getSearchResults(items);
 
     if (!filtered.length) {
 
-        const empty =
-            document.createElement("div");
+        element.innerHTML = `
+            <div class="empty-state"
+                 style="grid-column: 1 / -1">
 
-        empty.className = "empty";
+                <strong>
+                    Nothing here yet
+                </strong>
 
-        empty.textContent =
-            emptyMessage;
+                ${
+                    searchInput.value
+                        ? "No results match your search."
+                        : "Add a project to the repository and refresh."
+                }
 
-        content.appendChild(empty);
+            </div>
+        `;
 
         return;
-
     }
 
-    const grid =
-        document.createElement("div");
-
-    grid.className = "grid";
-
-    for (const item of filtered) {
-
-        grid.appendChild(
-            createCard(item)
-        );
-
-    }
-
-    content.appendChild(grid);
+    element.innerHTML =
+        filtered
+            .map(cardHTML)
+            .join("");
 
 }
 
 
 /* =========================================================
-   HOME
-   ========================================================= */
+   RENDER HOME
+========================================================= */
 
 function renderHome() {
 
-    pageTitle.textContent = "Home";
-
-    content.innerHTML = `
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    Kairo Environment
-                </div>
-
-                <h1>
-                    Games. Apps. Everything.
-                </h1>
-
-                <p>
-                    A single place for your browser games,
-                    applications, AI tools and experiments.
-                    Everything lives inside the Kairo ecosystem.
-                </p>
-
-                <button
-                    class="hero-button"
-                    id="browseButton"
-                >
-                    Browse Library
-                </button>
-
-            </div>
-
-        </section>
-
-    `;
-
-    document
-        .getElementById("browseButton")
-        .addEventListener(
-            "click",
-            () => switchPage("games")
+    const homeGames =
+        document.getElementById(
+            "homeGames"
         );
 
-
-    const favoriteItems =
-        allItems()
-            .filter(item =>
-                isFavorite(item.id)
-            );
-
-    const recentGames =
-        games.slice(0, 6);
-
-    const section =
-        document.createElement("section");
-
-    section.className = "section";
-
-    section.innerHTML = `
-
-        <div class="section-head">
-
-            <div class="section-title">
-                Games
-            </div>
-
-            <div class="section-count">
-                ${games.length}
-            </div>
-
-        </div>
-
-    `;
-
-    content.appendChild(section);
-
-    renderGrid(
-        recentGames,
-        "No games discovered yet."
-    );
-
-
-    if (favoriteItems.length) {
-
-        const favSection =
-            document.createElement("section");
-
-        favSection.className = "section";
-
-        favSection.innerHTML = `
-
-            <div class="section-head">
-
-                <div class="section-title">
-                    Favorites
-                </div>
-
-                <div class="section-count">
-                    ${favoriteItems.length}
-                </div>
-
-            </div>
-
-        `;
-
-        content.appendChild(
-            favSection
+    const homeApps =
+        document.getElementById(
+            "homeApps"
         );
 
-        renderGrid(
-            favoriteItems.slice(0, 6),
-            "No favorites."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   GAMES
-   ========================================================= */
-
-function renderGames() {
-
-    pageTitle.textContent = "Games";
-
-    content.innerHTML = "";
-
-    const section =
-        document.createElement("section");
-
-    section.className = "section";
-
-    section.innerHTML = `
-
-        <div class="section-head">
-
-            <div class="section-title">
-                Game Library
-            </div>
-
-            <div class="section-count">
-                ${games.length} games
-            </div>
-
-        </div>
-
-    `;
-
-    content.appendChild(section);
+    renderGrid(
+        homeGames,
+        games.slice(0, 6)
+    );
 
     renderGrid(
-        games,
-        "No games found. Add a game folder containing index.html to the repository."
+        homeApps,
+        apps.slice(0, 6)
     );
 
 }
 
 
 /* =========================================================
-   APPS
-   ========================================================= */
+   RENDER CURRENT PAGE
+========================================================= */
 
-function renderApps() {
-
-    pageTitle.textContent = "Apps";
-
-    content.innerHTML = "";
-
-    const section =
-        document.createElement("section");
-
-    section.className = "section";
-
-    section.innerHTML = `
-
-        <div class="section-head">
-
-            <div class="section-title">
-                Kairo Apps
-            </div>
-
-            <div class="section-count">
-                ${builtInApps.length}
-            </div>
-
-        </div>
-
-    `;
-
-    content.appendChild(section);
-
-    renderGrid(
-        builtInApps,
-        "No apps available."
-    );
-
-}
-
-
-/* =========================================================
-   FAVORITES
-   ========================================================= */
-
-function renderFavorites() {
-
-    pageTitle.textContent =
-        "Favorites";
-
-    content.innerHTML = "";
-
-    const items =
-        allItems()
-            .filter(item =>
-                isFavorite(item.id)
-            );
-
-    const section =
-        document.createElement("section");
-
-    section.className = "section";
-
-    section.innerHTML = `
-
-        <div class="section-head">
-
-            <div class="section-title">
-                Your Favorites
-            </div>
-
-            <div class="section-count">
-                ${items.length}
-            </div>
-
-        </div>
-
-    `;
-
-    content.appendChild(section);
-
-    renderGrid(
-        items,
-        "Nothing here yet. Click ☆ on a game or app to add it."
-    );
-
-}
-
-
-/* =========================================================
-   ABOUT
-   ========================================================= */
-
-function renderAbout() {
-
-    pageTitle.textContent =
-        "About";
-
-    content.innerHTML = `
-
-        <section class="section">
-
-            <div class="app-info">
-
-                <div class="eyebrow">
-                    Kairo Hub
-                </div>
-
-                <h2>
-                    One place for the Kairo ecosystem.
-                </h2>
-
-                <p>
-                    Kairo Hub is a lightweight browser-based
-                    launcher for games, applications, AI tools
-                    and experiments.
-                </p>
-
-                <p>
-                    Games are discovered directly from the
-                    GitHub repository, so adding a new game
-                    with an index.html file can make it appear
-                    automatically.
-                </p>
-
-                <div class="app-note">
-
-                    Repository:
-                    ${CONFIG.owner}/${CONFIG.repo}
-
-                    <br><br>
-
-                    Branch:
-                    ${CONFIG.branch}
-
-                </div>
-
-            </div>
-
-        </section>
-
-    `;
-
-}
-
-
-/* =========================================================
-   RENDER
-   ========================================================= */
-
-function render() {
+function renderCurrentPage() {
 
     if (currentPage === "home") {
         renderHome();
-        return;
     }
 
     if (currentPage === "games") {
-        renderGames();
-        return;
+
+        renderGrid(
+            document.getElementById("gamesGrid"),
+            games
+        );
+
     }
 
     if (currentPage === "apps") {
-        renderApps();
-        return;
+
+        renderGrid(
+            document.getElementById("appsGrid"),
+            apps
+        );
+
     }
 
     if (currentPage === "favorites") {
-        renderFavorites();
-        return;
-    }
 
-    if (currentPage === "about") {
-        renderAbout();
-        return;
+        const all =
+            [...games, ...apps];
+
+        const favorites =
+            all.filter(isFavorite);
+
+        renderGrid(
+            document.getElementById(
+                "favoritesGrid"
+            ),
+            favorites
+        );
+
     }
 
 }
 
 
 /* =========================================================
-   NAVIGATION
-   ========================================================= */
+   RENDER EVERYTHING
+========================================================= */
 
-function switchPage(page) {
+function renderAll() {
 
-    currentPage = page;
+    updateCounts();
 
-    document
-        .querySelectorAll(".nav-button")
-        .forEach(button => {
+    renderHome();
 
-            button.classList.toggle(
-                "active",
-                button.dataset.page === page
-            );
-
-        });
-
-    searchInput.value = "";
-
-    searchQuery = "";
-
-    render();
+    renderCurrentPage();
 
 }
 
 
-document
-    .querySelectorAll(".nav-button")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => switchPage(
-                button.dataset.page
-            )
-        );
-
-    });
-
-
 /* =========================================================
-   SEARCH
-   ========================================================= */
+   LAUNCH
+========================================================= */
 
-searchInput.addEventListener(
-    "input",
-    event => {
+function launchItem(item) {
 
-        searchQuery =
-            event.target.value;
-
-        render();
-
-    }
-);
-
-
-/* =========================================================
-   OPEN ITEM
-   ========================================================= */
-
-function openItem(item) {
-
-    currentItem = item;
-
-    /*
-       Built-in apps do not have URLs yet.
-       You can connect them later by adding a URL
-       to their object in builtInApps.
-    */
-
-    if (!item.url) {
-
-        showToast(
-            `${item.name} is ready to configure`
-        );
-
-        return;
-
-    }
+    currentPlayerURL =
+        item.url;
 
     playerTitle.textContent =
         item.name;
 
-    playerUrl.textContent =
-        item.url;
-
-    playerFrame.src =
+    gameFrame.src =
         item.url;
 
     playerOverlay.classList.add(
@@ -2041,15 +1813,7 @@ function openItem(item) {
 
 /* =========================================================
    PLAYER CONTROLS
-   ========================================================= */
-
-document
-    .getElementById("playerClose")
-    .addEventListener(
-        "click",
-        closePlayer
-    );
-
+========================================================= */
 
 function closePlayer() {
 
@@ -2057,106 +1821,47 @@ function closePlayer() {
         "open"
     );
 
-    playerFrame.src =
+    gameFrame.src =
         "about:blank";
 
-    currentItem = null;
+    currentPlayerURL =
+        "";
 
     document.body.style.overflow =
-        "hidden";
+        "";
 
 }
 
 
-document
-    .getElementById("playerReload")
-    .addEventListener(
-        "click",
-        () => {
+function reloadPlayer() {
 
-            if (!currentItem) {
-                return;
-            }
-
-            playerFrame.src =
-                currentItem.url;
-
-        }
-    );
-
-
-document
-    .getElementById("playerFullscreen")
-    .addEventListener(
-        "click",
-        async () => {
-
-            const windowElement =
-                document.querySelector(
-                    ".player-window"
-                );
-
-            try {
-
-                if (
-                    document.fullscreenElement
-                ) {
-
-                    await document.exitFullscreen();
-
-                } else {
-
-                    await windowElement.requestFullscreen();
-
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-            }
-
-        }
-    );
-
-
-playerOverlay.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target ===
-            playerOverlay
-        ) {
-
-            closePlayer();
-
-        }
-
+    if (!currentPlayerURL) {
+        return;
     }
-);
+
+    gameFrame.src =
+        currentPlayerURL;
+
+}
 
 
-document.addEventListener(
-    "keydown",
-    event => {
+function fullscreenPlayer() {
 
-        if (
-            event.key === "Escape" &&
-            playerOverlay.classList.contains("open")
-        ) {
+    const frame =
+        document.getElementById(
+            "gameFrame"
+        );
 
-            closePlayer();
-
-        }
-
+    if (frame.requestFullscreen) {
+        frame.requestFullscreen();
     }
-);
+
+}
 
 
 /* =========================================================
    REFRESH
-   ========================================================= */
+========================================================= */
 
 document
     .getElementById("refreshButton")
@@ -2164,70 +1869,65 @@ document
         "click",
         async () => {
 
-            showToast(
-                "Refreshing library..."
-            );
+            const button =
+                document.getElementById(
+                    "refreshButton"
+                );
 
-            await loadGames();
+            button.textContent =
+                "…";
+
+            await discover();
+
+            button.textContent =
+                "↻";
 
         }
     );
 
 
 /* =========================================================
-   HASH LAUNCH
-   ========================================================= */
+   KEYBOARD SHORTCUTS
+========================================================= */
 
-function checkHashLaunch() {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    const hash =
-        window.location.hash;
+        if (
+            event.key === "/" &&
+            document.activeElement !== searchInput
+        ) {
 
-    if (!hash) {
-        return;
-    }
+            event.preventDefault();
 
-    if (
-        hash.startsWith("#play=")
-    ) {
+            searchInput.focus();
 
-        const id =
-            decodeURIComponent(
-                hash.substring(6)
-            );
+        }
 
-        const item =
-            allItems().find(
-                game =>
-                    game.id === id ||
-                    game.path === id
-            );
+        if (event.key === "Escape") {
 
-        if (item) {
+            if (
+                playerOverlay.classList.contains(
+                    "open"
+                )
+            ) {
 
-            openItem(item);
+                closePlayer();
+
+            }
 
         }
 
     }
-
-}
+);
 
 
 /* =========================================================
-   STARTUP
-   ========================================================= */
+   START
+========================================================= */
 
-render();
-
-loadGames();
-
-updateGamepadStatus();
-
-setTimeout(
-    checkHashLaunch,
-    1000
-);
+discover();
 
 </script>
 
