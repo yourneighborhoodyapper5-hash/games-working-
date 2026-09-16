@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairo YouTube</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #0b0c0e;
+        color: #f1f1f1;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .topbar {
+        height: 64px;
+        min-height: 64px;
+        background: #111316;
+        border-bottom: 1px solid #25282d;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 0 20px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        white-space: nowrap;
+    }
+
+    .logo {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #ff7a18;
+        display: grid;
+        place-items: center;
+        color: #111;
+        font-weight: 900;
+    }
+
+    .search {
+        flex: 1;
+        max-width: 720px;
+        margin: auto;
+        display: flex;
+        height: 40px;
+    }
+
+    .search input {
+        flex: 1;
+        min-width: 0;
+        background: #191c20;
+        border: 1px solid #30343a;
+        border-right: 0;
+        border-radius: 8px 0 0 8px;
+        color: white;
+        padding: 0 14px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .search input:focus {
+        border-color: #ff7a18;
+    }
+
+    button {
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .search button {
+        width: 52px;
+        background: #24282e;
+        color: white;
+        border: 1px solid #30343a;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .search button:hover {
+        background: #30343a;
+    }
+
+    .open-btn {
+        background: #ff7a18;
+        color: #111;
+        padding: 10px 14px;
+        border-radius: 7px;
+        white-space: nowrap;
+    }
+
+    .open-btn:hover {
+        background: #ff8e3d;
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        width: 220px;
+        min-width: 220px;
+        background: #0f1114;
+        border-right: 1px solid #25282d;
+        padding: 18px 12px;
+    }
+
+    .side-title {
+        color: #777d86;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin: 8px 10px 10px;
+    }
+
+    .side-button {
+        width: 100%;
+        text-align: left;
+        padding: 11px 12px;
+        margin-bottom: 4px;
+        border-radius: 7px;
+        background: transparent;
+        color: #b8bdc5;
+        font-size: 14px;
+    }
+
+    .side-button:hover {
+        background: #191c20;
+        color: white;
+    }
+
+    .content {
+        flex: 1;
+        padding: 24px;
+        overflow: auto;
+    }
+
+    .hero {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .title {
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        color: #858b94;
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .player {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        max-height: calc(100vh - 180px);
+        background: #050506;
+        border: 1px solid #25282d;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .player iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .empty {
+        text-align: center;
+        color: #777d86;
+        padding: 40px;
+    }
+
+    .empty strong {
+        display: block;
+        color: #d9dce0;
+        margin-bottom: 8px;
+        font-size: 18px;
+    }
+
+    .status {
+        margin-top: 14px;
+        color: #777d86;
+        font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+        .sidebar {
+            display: none;
+        }
+
+        .topbar {
+            padding: 0 10px;
+            gap: 8px;
+        }
+
+        .brand span {
+            display: none;
+        }
+
+        .open-btn {
+            padding: 9px;
+        }
+
+        .content {
+            padding: 12px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="logo">K</div>
+        <span>Kairo YouTube</span>
+    </div>
+
+    <form class="search" id="searchForm">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search YouTube..."
+            autocomplete="off"
+        >
+        <button type="submit">⌕</button>
+    </form>
+
+    <button class="open-btn" id="openYouTube">
+        Open YouTube
+    </button>
+
+</header>
+
+<main>
+
+    <aside class="sidebar">
+        <div class="side-title">Kairo</div>
+
+        <button class="side-button" onclick="goHome()">
+            ← Kairo Hub
+        </button>
+
+        <button class="side-button" onclick="openYouTube()">
+            YouTube
+        </button>
+
+        <div class="side-title">Navigation</div>
+
+        <button class="side-button" onclick="openYouTube()">
+            Home
+        </button>
+
+        <button class="side-button" onclick="focusSearch()">
+            Search
+        </button>
+    </aside>
+
+    <section class="content">
+
+        <div class="hero">
+
+            <div class="title">
+                YouTube
+            </div>
+
+            <div class="subtitle">
+                Watch YouTube from the Kairo app launcher.
+            </div>
+
+            <div class="player" id="player">
+                <div class="empty">
+                    <strong>Search for something to watch</strong>
+                    Enter a YouTube search above, or open YouTube directly.
+                </div>
+            </div>
+
+            <div class="status" id="status">
+                Kairo YouTube ready
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchForm = document.getElementById("searchForm");
+const player = document.getElementById("player");
+const statusText = document.getElementById("status");
+
+function openYouTube() {
+    window.open("https://www.youtube.com/", "_blank", "noopener,noreferrer");
+}
+
+function goHome() {
+    const base = "/games-working-/";
+    window.location.href = base;
+}
+
+function focusSearch() {
+    searchInput.focus();
+}
+
+function searchYouTube(query) {
+    query = query.trim();
+
+    if (!query) {
+        focusSearch();
+        return;
+    }
+
+    const searchURL =
+        "https://www.youtube.com/results?search_query=" +
+        encodeURIComponent(query);
+
+    /*
+     * YouTube generally does not allow its normal search-results
+     * pages to be embedded inside another page.
+     *
+     * Open the search normally instead of trying to bypass that.
+     */
+    window.open(searchURL, "_blank", "noopener,noreferrer");
+
+    statusText.textContent =
+        "Opened YouTube search for: " + query;
+}
+
+searchForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    searchYouTube(searchInput.value);
+});
+
+document.getElementById("openYouTube")
+    .addEventListener("click", openYouTube);
+</script>
+
+</body>
+</html>
