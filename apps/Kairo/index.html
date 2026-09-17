@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kairo AI</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #ff6600;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ff6600;
+      text-shadow: 0 0 10px #ff6600;
+    }
+    select, input, button, textarea {
+      background-color: #111;
+      border: 2px solid #ff6600;
+      color: #ff6600;
+      font-size: 1rem;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 600px;
+    }
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ff6600;
+      color: #000;
+    }
+    textarea {
+      height: 150px;
+      resize: vertical;
+      font-family: monospace;
+    }
+    .response {
+      white-space: pre-wrap;
+      max-width: 600px;
+      background-color: #111;
+      border: 2px solid #ff6600;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+      min-height: 100px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>Kairo AI</header>
 
+  <label for="apiKey">API Key (place your Ollama API key here):</label>
+  <input type="password" id="apiKey" placeholder="Enter API Key" />
+
+  <label for="modelSelect">Select Model:</label>
+  <select id="modelSelect" disabled>
+    <option>Loading models...</option>
+  </select>
+
+  <label for="prompt">Enter your prompt:</label>
+  <textarea id="prompt" placeholder="Type your question or prompt here..."></textarea>
+
+  <button id="sendBtn" disabled>Send</button>
+
+  <div class="response" id="response"></div>
+
+  <script>
+    const apiKeyInput = document.getElementById('apiKey');
+    const modelSelect = document.getElementById('modelSelect');
+    const promptInput = document.getElementById('prompt');
+    const sendBtn = document.getElementById('sendBtn');
+    const responseDiv = document.getElementById('response');
+
+    let apiKey = '';
+    let models = [];
+
+    // Function to fetch models from Ollama API
+    async function fetchModels() {
+      if (!apiKey) {
+        modelSelect.innerHTML = '<option>Please enter API key first</option>';
+        modelSelect.disabled = true;
+        sendBtn.disabled = true;
+        return;
+      }
+
+      try {
+        const res = await fetch('https://api.ollama.com/models', {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        });
+        if (!res.ok) throw new Error('Failed to fetch models');
+        models = await res.json();
+
+        if (Array.isArray(models) && models.length > 0) {
+          modelSelect.innerHTML = '';
+          models.forEach(model => {
+            const opt = document.createElement('option');
+            opt.value = model.name || model.id || model; // depending on API response structure
+            opt.textContent = model.name || model.id || model;
+            modelSelect.appendChild(opt);
+          });
+          modelSelect.disabled = false;
+          sendBtn.disabled = false;
+        } else {
+          modelSelect.innerHTML = '<option>No models found</option>';
+          modelSelect.disabled = true;
+          sendBtn.disabled = true;
+        }
+      } catch (err) {
+        modelSelect.innerHTML = `<option>Error fetching models</option>`;
+        modelSelect.disabled = true;
+        sendBtn.disabled = true;
+        console.error(err);
+      }
+    }
+
+    // Fetch models when API key changes (with debounce)
+    let debounceTimeout;
+    apiKeyInput.addEventListener('input', () => {
+      clearTimeout(debounceTimeout);
+      apiKey = apiKeyInput.value.trim();
+      modelSelect.innerHTML = '<option>Loading models...</option>';
+      modelSelect.disabled = true;
+      sendBtn.disabled = true;
+
+      debounceTimeout = setTimeout(() => {
+        if (apiKey) {
+          fetchModels();
+        } else {
+          modelSelect.innerHTML = '<option>Please enter API key first</option>';
+          modelSelect.disabled = true;
+          sendBtn.disabled = true;
+        }
+      }, 500);
+    });
+
+    // Send prompt to selected model
+    sendBtn.addEventListener('click', async () => {
+      const prompt = promptInput.value.trim();
+      const selectedModel = modelSelect.value;
+
+      if (!prompt) {
+        alert('Please enter a prompt.');
+        return;
+      }
+
+      responseDiv.textContent = 'Loading...';
+
+      try {
+        const res = await fetch(`https://api.ollama.com/chat/completions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            model: selectedModel,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status} ${res.statusText}`);
+        }
+
+        const data = await res.json();
+
+        // Assuming the API returns response in data.choices[0].message.content
+        const reply = data.choices?.[0]?.message?.content || 'No response from API';
+        responseDiv.textContent = reply;
+
+      } catch (error) {
+        responseDiv.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
