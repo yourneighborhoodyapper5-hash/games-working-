@@ -10,81 +10,81 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Kairo Launcher</title>
+    <title>Kairo Android</title>
 
     <style>
 
+        html,
         body {
             margin: 0;
-            background: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        #launcher {
-            padding: 20px;
-        }
-
-        button {
-            padding: 12px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
         }
 
         #android-screen {
             width: 100%;
-            max-width: 1024px;
-            height: 768px;
-            margin: 20px auto;
-            background: black;
-            overflow: hidden;
-        }
-
-        #android-screen canvas {
-            width: 100%;
             height: 100%;
-            image-rendering: pixelated;
+            position: relative;
         }
 
-        .android-error {
-            padding: 20px;
-            color: #ff6b6b;
+        #controls {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+
+        button {
+            padding: 10px 14px;
+            margin-right: 5px;
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <div id="launcher">
+    <div id="android-screen">
 
-        <h1>Kairo Launcher</h1>
+        <div class="screen"></div>
+
+        <div class="keyboard"></div>
+
+    </div>
+
+
+    <div id="controls">
 
         <button onclick="startAndroid()">
             Start Android
         </button>
 
-        <button onclick="stopAndroid()">
-            Stop Android
+        <button onclick="resetAndroid()">
+            Restart
         </button>
 
-        <div id="android-screen"></div>
+        <button onclick="stopAndroid()">
+            Stop
+        </button>
+
+        <button onclick="fullscreenAndroid()">
+            Fullscreen
+        </button>
 
     </div>
 
 
     <!-- v86 -->
-    <script src="./x86/libv86.js"></script>
+    <script src="v86/libv86.js"></script>
 
-    <!-- Your Android emulator -->
-    <script src="./android.js"></script>
-
-    <!-- Storage system -->
-    <script src="./storage.js"></script>
+    <!-- Kairo Android -->
+    <script src="storage.js"></script>
+    <script src="android.js"></script>
 
 </body>
 
