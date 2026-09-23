@@ -1,6 +1,17 @@
 /*
  * Kairo Android
- * v86 Android emulator
+ * v86 Android emulator layer
+ *
+ * Folder structure:
+ *
+ * /
+ * ├── index.html
+ * ├── storage.js
+ * ├── android.js
+ * └── v86/
+ *     ├── build/
+ *     ├── src/
+ *     └── ...
  */
 
 const ANDROID_ISO =
@@ -10,83 +21,117 @@ let androidEmulator = null;
 
 
 /* =========================================================
-   START ANDROID
+   ANDROID EMULATOR
 ========================================================= */
 
 async function startAndroid() {
 
-    const screen = document.getElementById("android-screen");
-
-    if (!screen) {
-        console.error("Android screen element not found.");
-        return;
-    }
-
-    // Prevent starting multiple emulators
     if (androidEmulator) {
         console.log("Android is already running.");
-        return;
+        return androidEmulator;
     }
 
-    screen.innerHTML = "";
+    const screen =
+        document.getElementById("android-screen");
 
-    const canvas = document.createElement("canvas");
+    if (!screen) {
+        throw new Error(
+            "Missing #android-screen element."
+        );
+    }
 
-    canvas.id = "android-canvas";
-    canvas.width = 1024;
-    canvas.height = 768;
 
-    screen.appendChild(canvas);
+    /*
+     * v86 requires its emulator library.
+     *
+     * Make sure your v86 folder contains:
+     *
+     * build/libv86.js
+     *
+     * If your build uses a different location,
+     * change the script path in index.html.
+     */
 
-    try {
+    if (typeof V86Starter === "undefined") {
 
-        androidEmulator = new V86Starter({
+        throw new Error(
+            "v86 is not loaded. Make sure libv86.js is loaded before android.js."
+        );
 
-            wasm_path: "./x86/v86.wasm",
+    }
 
-            memory_size: 512 * 1024 * 1024,
 
-            vga_memory_size: 8 * 1024 * 1024,
+    console.log(
+        "Starting Kairo Android..."
+    );
 
-            screen_container: screen,
 
-            bios: {
-                url: "./x86/seabios.bin"
-            },
+    androidEmulator =
+        new V86Starter({
 
-            vga_bios: {
-                url: "./x86/vgabios.bin"
-            },
+            wasm_path:
+                "v86/build/v86.wasm",
 
-            cdrom: {
-                url: ANDROID_ISO
-            },
+            memory_size:
+                512 * 1024 * 1024,
 
-            autostart: true,
+            vga_memory_size:
+                8 * 1024 * 1024,
 
-            network_relay_url:
-                "wss://relay.widgetry.org/"
+            screen_container:
+                screen,
+
+            bios:
+                {
+                    url:
+                        "v86/bios/seabios.bin"
+                },
+
+            vga_bios:
+                {
+                    url:
+                        "v86/bios/vgabios.bin"
+                },
+
+            cdrom:
+                {
+                    url:
+                        ANDROID_ISO
+                },
+
+            autostart:
+                true,
+
+            disable_keyboard:
+                false,
+
+            disable_mouse:
+                false,
+
+            acpi:
+                true,
+
+            enable_ne2k:
+                true,
+
+            preserve_mac_from_state_image:
+                true,
+
+            filesystem:
+                {
+                    baseurl:
+                        "v86/build/"
+                }
 
         });
 
-        console.log("Android emulator started.");
 
-    } catch (error) {
+    console.log(
+        "Kairo Android started."
+    );
 
-        console.error(
-            "Failed to start Android:",
-            error
-        );
 
-        screen.innerHTML = `
-            <div class="android-error">
-                <h2>Android failed to start</h2>
-                <p>${error.message}</p>
-            </div>
-        `;
-
-        androidEmulator = null;
-    }
+    return androidEmulator;
 }
 
 
@@ -100,35 +145,86 @@ function stopAndroid() {
         return;
     }
 
-    try {
-
-        androidEmulator.stop();
-
-    } catch (error) {
-
-        console.error(
-            "Failed to stop Android:",
-            error
-        );
-
-    }
+    androidEmulator.stop();
 
     androidEmulator = null;
+
+    console.log(
+        "Kairo Android stopped."
+    );
+
+}
+
+
+/* =========================================================
+   RESET ANDROID
+========================================================= */
+
+function resetAndroid() {
+
+    if (!androidEmulator) {
+        return;
+    }
+
+    androidEmulator.restart();
+
+    console.log(
+        "Kairo Android restarted."
+    );
+
+}
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+function fullscreenAndroid() {
 
     const screen =
         document.getElementById(
             "android-screen"
         );
 
-    if (screen) {
-        screen.innerHTML = "";
+    if (!screen) {
+        return;
     }
+
+
+    if (
+        document.fullscreenElement
+    ) {
+
+        document.exitFullscreen();
+
+        return;
+
+    }
+
+
+    if (
+        screen.requestFullscreen
+    ) {
+
+        screen.requestFullscreen();
+
+    }
+
 }
 
 
 /* =========================================================
-   GLOBAL EXPORT
+   GLOBAL EXPORTS
 ========================================================= */
 
-window.startAndroid = startAndroid;
-window.stopAndroid = stopAndroid;
+window.startAndroid =
+    startAndroid;
+
+window.stopAndroid =
+    stopAndroid;
+
+window.resetAndroid =
+    resetAndroid;
+
+window.fullscreenAndroid =
+    fullscreenAndroid;
