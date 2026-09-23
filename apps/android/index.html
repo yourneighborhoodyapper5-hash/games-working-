@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Kairo Android</title>
 
-    <style>
+    <script src="v86/libv86.js"></script>
+    <script src="storage.js"></script>
+    <script src="android.js"></script>
 
+    <style>
         html,
         body {
             margin: 0;
@@ -27,65 +24,28 @@
         #android-screen {
             width: 100%;
             height: 100%;
+            background: #000;
             position: relative;
         }
 
-        #controls {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
+        #android-screen .screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
         }
 
-        button {
-            padding: 10px 14px;
-            margin-right: 5px;
+        #android-screen .keyboard {
+            display: none;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
     <div id="android-screen">
-
         <div class="screen"></div>
-
         <div class="keyboard"></div>
-
     </div>
-
-
-    <div id="controls">
-
-        <button onclick="startAndroid()">
-            Start Android
-        </button>
-
-        <button onclick="resetAndroid()">
-            Restart
-        </button>
-
-        <button onclick="stopAndroid()">
-            Stop
-        </button>
-
-        <button onclick="fullscreenAndroid()">
-            Fullscreen
-        </button>
-
-    </div>
-
-
-    <!-- v86 -->
-    <script src="v86/libv86.js"></script>
-
-    <!-- Kairo Android -->
-    <script src="storage.js"></script>
-    <script src="android.js"></script>
 
 </body>
-
 </html>
