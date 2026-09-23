@@ -1,17 +1,6 @@
 /*
  * Kairo Android
- * v86 Android emulator layer
- *
- * Folder structure:
- *
- * /
- * ├── index.html
- * ├── storage.js
- * ├── android.js
- * └── v86/
- *     ├── build/
- *     ├── src/
- *     └── ...
+ * v86 Android emulator
  */
 
 const ANDROID_ISO =
@@ -21,14 +10,14 @@ let androidEmulator = null;
 
 
 /* =========================================================
-   ANDROID EMULATOR
+   START ANDROID
 ========================================================= */
 
-async function startAndroid() {
+function startAndroid() {
 
     if (androidEmulator) {
         console.log("Android is already running.");
-        return androidEmulator;
+        return;
     }
 
     const screen =
@@ -40,103 +29,68 @@ async function startAndroid() {
         );
     }
 
-
-    /*
-     * v86 requires its emulator library.
-     *
-     * Make sure your v86 folder contains:
-     *
-     * build/libv86.js
-     *
-     * If your build uses a different location,
-     * change the script path in index.html.
-     */
-
     if (typeof V86Starter === "undefined") {
-
         throw new Error(
-            "v86 is not loaded. Make sure libv86.js is loaded before android.js."
+            "v86 is not loaded."
         );
-
     }
 
+    console.log("Starting Kairo Android...");
 
-    console.log(
-        "Starting Kairo Android..."
-    );
+    androidEmulator = new V86Starter({
 
+        wasm_path:
+            "v86/v86.wasm",
 
-    androidEmulator =
-        new V86Starter({
+        memory_size:
+            512 * 1024 * 1024,
 
-            wasm_path:
-                "v86/build/v86.wasm",
+        vga_memory_size:
+            8 * 1024 * 1024,
 
-            memory_size:
-                512 * 1024 * 1024,
+        screen_container:
+            screen,
 
-            vga_memory_size:
-                8 * 1024 * 1024,
+        bios: {
+            url:
+                "v86/seabios.bin"
+        },
 
-            screen_container:
-                screen,
+        vga_bios: {
+            url:
+                "v86/vgabios.bin"
+        },
 
-            bios:
-                {
-                    url:
-                        "v86/bios/seabios.bin"
-                },
+        cdrom: {
+            url:
+                ANDROID_ISO
+        },
 
-            vga_bios:
-                {
-                    url:
-                        "v86/bios/vgabios.bin"
-                },
+        autostart:
+            true,
 
-            cdrom:
-                {
-                    url:
-                        ANDROID_ISO
-                },
+        acpi:
+            true,
 
-            autostart:
-                true,
+        enable_ne2k:
+            true,
 
-            disable_keyboard:
-                false,
+        disable_mouse:
+            false,
 
-            disable_mouse:
-                false,
+        disable_keyboard:
+            false
 
-            acpi:
-                true,
-
-            enable_ne2k:
-                true,
-
-            preserve_mac_from_state_image:
-                true,
-
-            filesystem:
-                {
-                    baseurl:
-                        "v86/build/"
-                }
-
-        });
-
+    });
 
     console.log(
         "Kairo Android started."
     );
-
-
-    return androidEmulator;
 }
 
 
 /* =========================================================
-   STOP ANDROID
+   STOP
 ========================================================= */
 
 function stopAndroid() {
@@ -152,12 +106,11 @@ function stopAndroid() {
     console.log(
         "Kairo Android stopped."
     );
-
 }
 
 
 /* =========================================================
-   RESET ANDROID
+   RESET
 ========================================================= */
 
 function resetAndroid() {
@@ -171,7 +124,6 @@ function resetAndroid() {
     console.log(
         "Kairo Android restarted."
     );
-
 }
 
 
@@ -190,31 +142,23 @@ function fullscreenAndroid() {
         return;
     }
 
-
-    if (
-        document.fullscreenElement
-    ) {
+    if (document.fullscreenElement) {
 
         document.exitFullscreen();
 
         return;
-
     }
 
-
-    if (
-        screen.requestFullscreen
-    ) {
+    if (screen.requestFullscreen) {
 
         screen.requestFullscreen();
 
     }
-
 }
 
 
 /* =========================================================
-   GLOBAL EXPORTS
+   EXPORT
 ========================================================= */
 
 window.startAndroid =
