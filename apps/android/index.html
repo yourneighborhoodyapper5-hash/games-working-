@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kairo Launcher</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        #launcher {
+            padding: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #android-screen {
+            width: 100%;
+            max-width: 1024px;
+            height: 768px;
+            margin: 20px auto;
+            background: black;
+            overflow: hidden;
+        }
+
+        #android-screen canvas {
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .android-error {
+            padding: 20px;
+            color: #ff6b6b;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="launcher">
+
+        <h1>Kairo Launcher</h1>
+
+        <button onclick="startAndroid()">
+            Start Android
+        </button>
+
+        <button onclick="stopAndroid()">
+            Stop Android
+        </button>
+
+        <div id="android-screen"></div>
+
+    </div>
+
+
+    <!-- v86 -->
+    <script src="./x86/libv86.js"></script>
+
+    <!-- Your Android emulator -->
+    <script src="./android.js"></script>
+
+    <!-- Storage system -->
+    <script src="./storage.js"></script>
+
+</body>
+
+</html>
